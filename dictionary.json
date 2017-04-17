@@ -1,0 +1,246 @@
+{
+    "name": "Example Spacecraft",
+    "identifier": "sc",
+    "subsystems": [
+        {
+            "name": "Vehicle",
+            "identifier": "v",
+            "measurements": [
+                {
+                    "name": "Altitude",
+                    "identifier": "v.altitude",
+                    "units": "meters",
+                    "type": "float"
+                },
+                {
+                    "name": "Height From Terrain",
+                    "identifier": "v.heightFromTerrain",
+                    "units": "meters",
+                    "type": "float"
+                },
+                {
+                    "name": "Terrain Height",
+                    "identifier": "v.terrainHeight",
+                    "units": "meters",
+                    "type": "float"
+                },
+                {
+                    "name": "Mission Time",
+                    "identifier": "v.missionTime",
+                    "units": "seconds",
+                    "type": "float"
+                },
+                {
+                    "name": "Surface Velocity",
+                    "identifier": "v.surfaceVelocity",
+                    "units": "m/s",
+                    "type": "float"
+                },
+                {
+                    "name": "Surface Velocity X",
+                    "identifier": "v.surfaceVelocityx",
+                    "units": "m/s",
+                    "type": "float"
+                },
+                {
+                    "name": "Surface Velocity Y",
+                    "identifier": "v.surfaceVelocityy",
+                    "units": "m/s",
+                    "type": "float"
+                },
+                {
+                    "name": "Surface Velocity Z",
+                    "identifier": "v.surfaceVelocityz",
+                    "units": "m/s",
+                    "type": "float"
+                },
+                {
+                    "name": "Angular Velocity",
+                    "identifier": "v.angularVelocity",
+                    "units": "m/s",
+                    "type": "float"
+                },
+                {
+                    "name": "Orbital Velocity",
+                    "identifier": "v.orbitalVelocity",
+                    "units": "m/s",
+                    "type": "float"
+                },
+                {
+                    "name": "Surface Speed",
+                    "identifier": "v.surfaceSpeed",
+                    "units": "m/s",
+                    "type": "float"
+                },
+                {
+                    "name": "Vertical Speed",
+                    "identifier": "v.verticalSpeed",
+                    "units": "m/s",
+                    "type": "float"
+                },
+                {
+                    "name": "G-Force",
+                    "identifier": "v.geeForce",
+                    "units": "gravity",
+                    "type": "float"
+                },
+                {
+                    "name": "Atmospheric Density",
+                    "identifier": "v.atmosphericDensity",
+                    "units": "kPa",
+                    "type": "float"
+                },
+                {
+                    "name": "Longitude",
+                    "identifier": "v.long",
+                    "units": "degree",
+                    "type": "float"
+                },
+                {
+                    "name": "Latitude",
+                    "identifier": "v.lat",
+                    "units": "degree",
+                    "type": "float"
+                },
+                {
+                    "name": "Dynamic Pressure",
+                    "identifier": "v.dynamicPressure",
+                    "units": "kPa",
+                    "type": "float"
+                },
+                {
+                    "name": "Name",
+                    "identifier": "v.name",
+                    "units": "string",
+                    "type": "string"
+                },
+                {
+                    "name": "Angle to Prograde",
+                    "identifier": "v.angleToPrograde",
+                    "units": "degree",
+                    "type": "float"
+                }
+            ]
+        },
+        {
+            "name": "Communications",
+            "identifier": "comms",
+            "measurements": [
+                {
+                    "name": "Received",
+                    "identifier": "comms.recd",
+                    "units": "bytes",
+                    "type": "integer"
+                },
+                {
+                    "name": "Sent",
+                    "identifier": "comms.sent",
+                    "units": "bytes",
+                    "type": "integer"
+                }
+            ]
+        },
+        {
+            "name": "Power",
+            "identifier": "pwr",
+            "measurements": [
+                {
+                    "name": "Generator Temperature",
+                    "identifier": "pwr.temp",
+                    "units": "\u0080C",
+                    "type": "float"
+                },
+                {
+                    "name": "Generator Current",
+                    "identifier": "pwr.c",
+                    "units": "A",
+                    "type": "float"
+                },
+                {
+                    "name": "Generator Voltage",
+                    "identifier": "pwr.v",
+                    "units": "V",
+                    "type": "float"
+                }
+            ]
+        },
+        {
+            "name": "System Information",
+            "identifier": "sys",
+            "measurements": [
+                {
+                    "name": "System Uptime",
+                    "identifier": "sys.uptime",
+                    "units": "s",
+                    "type": "float"
+                },
+                {
+                    "name": "Processor Percent",
+                    "identifier": "sys.proc_percent",
+                    "units": "%",
+                    "type": "float"
+                },
+                {
+                    "name": "Memory Used",
+                    "identifier": "sys.memused",
+                    "units": "Kbytes",
+                    "type": "float"
+                },
+                {
+                    "name": "System Idle",
+                    "identifier": "sys.idle",
+                    "units": "%",
+                    "type": "float"
+                },
+                {
+                    "name": "Memory Free",
+                    "identifier": "sys.memfree",
+                    "units": "Kbytes",
+                    "type": "float"
+                },
+                {
+                    "name": "Memory Total",
+                    "identifier": "sys.memtotal",
+                    "units": "Kbytes",
+                    "type": "float"
+                },
+                {
+                    "name": "Memory Active",
+                    "identifier": "sys.memactive",
+                    "units": "Kbytes",
+                    "type": "float"
+                },
+                {
+                    "name": "Memory Available",
+                    "identifier": "sys.memavailable",
+                    "units": "Kbytes",
+                    "type": "float"
+                },
+                {
+                    "name": "Received Bytes",
+                    "identifier": "sys.rxbytes",
+                    "units": "Bytes",
+                    "type": "float"
+                },
+                {
+                    "name": "Received Packets",
+                    "identifier": "sys.rxpackets",
+                    "units": "Bytes",
+                    "type": "float"
+                },
+                {
+                    "name": "Transmitted Bytes",
+                    "identifier": "sys.txbytes",
+                    "units": "Bytes",
+                    "type": "float"
+                },
+                {
+                    "name": "Transmitted Packets",
+                    "identifier": "sys.txpackets",
+                    "units": "Bytes",
+                    "type": "float"
+                }
+            ]
+        }
+    ]
+}

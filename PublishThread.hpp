@@ -30,6 +30,7 @@ public:
 
 	void get_v();
 	void get_o();
+	void get_n();
 
 	void CALL_TYPE run();
 

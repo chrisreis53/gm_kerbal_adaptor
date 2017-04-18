@@ -123,20 +123,212 @@
             ]
         },
         {
-            "name": "Communications",
-            "identifier": "comms",
+            "name": "Orbit",
+            "identifier": "o",
             "measurements": [
                 {
-                    "name": "Received",
-                    "identifier": "comms.recd",
-                    "units": "bytes",
-                    "type": "integer"
+                    "name": "Relative Velocity",
+                    "identifier": "o.relativeVelocity",
+                    "units": "m/s",
+                    "type": "float"
                 },
                 {
-                    "name": "Sent",
-                    "identifier": "comms.sent",
-                    "units": "bytes",
-                    "type": "integer"
+                    "name": "Periapsis",
+                    "identifier": "o.PeA",
+                    "units": "meters",
+                    "type": "float"
+                },
+                {
+                    "name": "Apoapsis",
+                    "identifier": "o.ApA",
+                    "units": "m/s",
+                    "type": "float"
+                },
+                {
+                    "name": "Time to Apoapsis",
+                    "identifier": "o.timeToAp",
+                    "units": "seconds",
+                    "type": "float"
+                },
+                {
+                    "name": "Time to Periapsis",
+                    "identifier": "o.timeToPe",
+                    "units": "seconds",
+                    "type": "float"
+                },
+                {
+                    "name": "Inclination",
+                    "identifier": "o.inclination",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Eccentricity",
+                    "identifier": "o.eccentricity",
+                    "units": "none",
+                    "type": "float"
+                },
+                {
+                    "name": "Epoch",
+                    "identifier": "o.epoch",
+                    "units": "seconds",
+                    "type": "float"
+                },
+                {
+                    "name": "Period",
+                    "identifier": "o.period",
+                    "units": "none",
+                    "type": "float"
+                },
+                {
+                    "name": "Argument of Periapsis",
+                    "identifier": "o.argumentOfPariapsis",
+                    "units": "degree",
+                    "type": "float"
+                },
+                {
+                    "name": "Semimajor Axis",
+                    "identifier": "o.sma",
+                    "units": "degree",
+                    "type": "float"
+                },
+                {
+                    "name": "Longitude of Ascending Node",
+                    "identifier": "o.lan",
+                    "units": "degree",
+                    "type": "float"
+                },
+                {
+                    "name": "Mean Anomaly at Epoch",
+                    "identifier": "o.maae",
+                    "units": "none",
+                    "type": "float"
+                },
+                {
+                    "name": "Time of Periapsis Passage",
+                    "identifier": "o.timeOfPariapsisPassage",
+                    "units": "seconds",
+                    "type": "float"
+                },
+                {
+                    "name": "True Anomaly",
+                    "identifier": "o.trueAnomaly",
+                    "units": "none",
+                    "type": "float"
+                }
+            ]
+        },
+        {
+            "name": "Navigation",
+            "identifier": "n",
+            "measurements": [
+                {
+                    "name": "Heading",
+                    "identifier": "n.heading2",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Pitch",
+                    "identifier": "n.pitch2",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Roll",
+                    "identifier": "n.roll2",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Raw Heading",
+                    "identifier": "n.rawheading2",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Raw Pitch",
+                    "identifier": "n.rawpitch2",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Raw Roll",
+                    "identifier": "n.rawroll2",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Root Heading",
+                    "identifier": "n.heading",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Root Pitch",
+                    "identifier": "n.pitch",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Root Roll",
+                    "identifier": "n.roll",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Root Raw Heading",
+                    "identifier": "n.rawheading",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Root Raw Pitch",
+                    "identifier": "n.rawpitch",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Root Raw Roll",
+                    "identifier": "n.rawroll",
+                    "units": "degrees",
+                    "type": "float"
+                }
+            ]
+        },
+        {
+            "name": "Docking",
+            "identifier": "dock",
+            "measurements": [
+                {
+                    "name": "Docking x Angle",
+                    "identifier": "dock.ax",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Docking y Angle",
+                    "identifier": "dock.ay",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Docking z Angle",
+                    "identifier": "dock.az",
+                    "units": "degrees",
+                    "type": "float"
+                },
+                {
+                    "name": "Docking x Distance",
+                    "identifier": "dock.x",
+                    "units": "meters",
+                    "type": "float"
+                },
+                {
+                    "name": "Docking y Distance",
+                    "identifier": "dock.y",
+                    "units": "meters",
+                    "type": "float"
                 }
             ]
         },

@@ -27,9 +27,8 @@ using namespace gmsec::api;
 json dictionary;
 std::string url = "http://192.168.1.4:8085/telemachus/datalink?";
 std::string v_url;
-std::vector<std::string> v_meas;
 std::string o_url;
-std::vector<std::string> o_meas;
+std::string n_url;
 
 static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
 {
@@ -74,13 +73,28 @@ void CALL_TYPE PublishThread::run()
           v_url += id + "=" + id + "&";
         }
       }
+      if(dictionary["subsystems"][i]["name"] == "Orbit"){
+        o_url += url;
+        for (size_t j = 0; j < dictionary["subsystems"][i]["measurements"].size(); j++) {
+          std::string id(dictionary["subsystems"][i]["measurements"][j]["identifier"].get<std::string>());
+          o_url += id + "=" + id + "&";
+        }
+      }
+      if(dictionary["subsystems"][i]["name"] == "Navigation"){
+        n_url += url;
+        for (size_t j = 0; j < dictionary["subsystems"][i]["measurements"].size(); j++) {
+          std::string id(dictionary["subsystems"][i]["measurements"][j]["identifier"].get<std::string>());
+          n_url += id + "=" + id + "&";
+        }
+      }
     }
     std::cout << v_url << '\n';
 		while (true) {
 			get_v();
-			//get_o();
+			get_o();
+      get_n();
 			//publish("GMSEC.TEST.PUBLISH");
-			example::millisleep(250);
+			example::millisleep(1000);
 		}
 
 		teardown();
@@ -142,61 +156,72 @@ void PublishThread::get_v(){
     Message message(subject.c_str(), Message::PUBLISH);
     for (json::iterator it = js.begin(); it != js.end(); ++it) {
       if (it.value().is_string()) {
-        //std::cout << it.key() << " : " << it.value().get<std::string>() << "\n";
         std::string field(it.key());
         message.addField(field.c_str(), it.value().get<std::string>().c_str());
       }
       if (it.value().is_number()) {
-        //std::cout << it.key() << " : " << it.value().get<float>() << "\n";
         std::string field(it.key());
         message.addField(field.c_str(), it.value().get<float>());
       }
-      //message.addField(std::string(it.key()).c_str(), std::string(it.value()).c_str());
     }
-    // for (size_t i = 0; i < js.size(); i++) {
-    //   std::cout << js[i].get<std::string>() << '\n';
-    // }
     connection->publish(message);
-		// float msnTime = js.at("v.missionTime");
-		// long alt = js.at("v.altitude");
-		// float latitude = js.at("v.lat");
-		// float longitude = js.at("v.long");
-		// std::string name = js.at("v.name");
-		// std::string subject = "GMSEC.KSP.MSG.TLM.PROCESSED.V";
-		// Message message(subject.c_str(), Message::PUBLISH);
-		// message.addField("ALTITUDE", (GMSEC_U32) alt);
-		// message.addField("MISSION-TIME", msnTime);
-		// message.addField("LONGITUDE", longitude);
-		// message.addField("LATITUDE", latitude);
-		// connection->publish(message);
-		// std::cout << msnTime << " " << alt << std::endl;
 	}
 }
 
 void PublishThread::get_o(){
-	std::string url = "http://192.168.1.4:8085/telemachus/datalink?";
-	url += "name=v.name&";
-	url += "orbit=o.orbitPatches";
-	CURL *curl;
+  CURL *curl;
 	CURLcode res;
 	std::string readBuffer;
 	curl = curl_easy_init();
 	if(curl) {
-		curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+		curl_easy_setopt(curl, CURLOPT_URL, o_url.c_str());
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
 		curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
 		res = curl_easy_perform(curl);
 		curl_easy_cleanup(curl);
 		json js = json::parse(readBuffer);
-		std::cout << readBuffer << std::endl;
-		json jo = js["orbit"][0];
-		//std::cout << jo.dump() << std::endl;
-		//std::string name = js.at("name");
-		float inclination = jo.at("inclination");
-		std::string subject = "GMSEC.KSP.MSG.TLM.PROCESSED.O";
-		Message message(subject.c_str(), Message::PUBLISH);
-		message.addField("INCLINATION", inclination);
-		connection->publish(message);
+		//std::cout << readBuffer << std::endl;
+    std::string subject = "GMSEC.KSP.MSG.TLM.PROCESSED.O";
+    Message message(subject.c_str(), Message::PUBLISH);
+    for (json::iterator it = js.begin(); it != js.end(); ++it) {
+      if (it.value().is_string()) {
+        std::string field(it.key());
+        message.addField(field.c_str(), it.value().get<std::string>().c_str());
+      }
+      if (it.value().is_number()) {
+        std::string field(it.key());
+        message.addField(field.c_str(), it.value().get<float>());
+      }
+    }
+    connection->publish(message);
+	}
+}
+
+void PublishThread::get_n(){
+	CURL *curl;
+	CURLcode res;
+	std::string readBuffer;
+	curl = curl_easy_init();
+	if(curl) {
+		curl_easy_setopt(curl, CURLOPT_URL, n_url.c_str());
+		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+		curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+		res = curl_easy_perform(curl);
+		curl_easy_cleanup(curl);
+		json js = json::parse(readBuffer);
+    std::string subject = "GMSEC.KSP.MSG.TLM.PROCESSED.N";
+    Message message(subject.c_str(), Message::PUBLISH);
+    for (json::iterator it = js.begin(); it != js.end(); ++it) {
+      if (it.value().is_string()) {
+        std::string field(it.key());
+        message.addField(field.c_str(), it.value().get<std::string>().c_str());
+      }
+      if (it.value().is_number()) {
+        std::string field(it.key());
+        message.addField(field.c_str(), it.value().get<float>());
+      }
+    }
+    connection->publish(message);
 	}
 }
 

@@ -15,6 +15,8 @@
 
 #include "PublishThread.hpp"
 
+#include <cstdlib>
+#include <chrono>
 #include <string>
 #include <curl/curl.h>
 
@@ -62,7 +64,7 @@ void CALL_TYPE PublishThread::run()
 
 		//o Delay to allow subscriber thread to set up
 		example::millisleep(100);
-    std::ifstream myfile ("dictionary.json");
+    std::ifstream myfile ("/GMSEC_API/bin/dictionary_adaptor.json");
     std::string str((std::istreambuf_iterator<char>(myfile)), (std::istreambuf_iterator<char>()));
     dictionary = json::parse(str);
     for (size_t i = 0; i < dictionary["subsystems"].size(); i++) {
@@ -138,6 +140,11 @@ void PublishThread::publish(const char* subject)
 //   document.rapidjson::ParseStream(is);
 //
 // }
+unsigned long PublishThread::get_time(){
+  using namespace std::chrono;
+  unsigned long millis = duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
+  return millis;
+}
 
 void PublishThread::get_v(){
 	CURL *curl;
@@ -154,6 +161,7 @@ void PublishThread::get_v(){
 		//std::cout << readBuffer << std::endl;
     std::string subject = "GMSEC.KSP.MSG.TLM.PROCESSED.V";
     Message message(subject.c_str(), Message::PUBLISH);
+    message.addField("PUBLISH-TIME-UL", (GMSEC_I64) get_time());
     for (json::iterator it = js.begin(); it != js.end(); ++it) {
       if (it.value().is_string()) {
         std::string field(it.key());
@@ -183,6 +191,7 @@ void PublishThread::get_o(){
 		//std::cout << readBuffer << std::endl;
     std::string subject = "GMSEC.KSP.MSG.TLM.PROCESSED.O";
     Message message(subject.c_str(), Message::PUBLISH);
+    message.addField("PUBLISH-TIME-UL", (GMSEC_I64) get_time());
     for (json::iterator it = js.begin(); it != js.end(); ++it) {
       if (it.value().is_string()) {
         std::string field(it.key());
@@ -211,6 +220,7 @@ void PublishThread::get_n(){
 		json js = json::parse(readBuffer);
     std::string subject = "GMSEC.KSP.MSG.TLM.PROCESSED.N";
     Message message(subject.c_str(), Message::PUBLISH);
+    message.addField("PUBLISH-TIME-UL", (GMSEC_I64) get_time());
     for (json::iterator it = js.begin(); it != js.end(); ++it) {
       if (it.value().is_string()) {
         std::string field(it.key());

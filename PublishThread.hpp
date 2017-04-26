@@ -32,6 +32,8 @@ public:
 	void get_o();
 	void get_n();
 
+	unsigned long get_time();
+
 	void CALL_TYPE run();
 
 	void CALL_TYPE shutdown();

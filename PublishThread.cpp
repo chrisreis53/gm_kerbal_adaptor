@@ -27,7 +27,7 @@ using json = nlohmann::json;
 using namespace gmsec::api;
 
 json dictionary;
-std::string url = "http://192.168.1.4:8085/telemachus/datalink?";
+std::string url = "http://192.168.0.58:8085/telemachus/datalink?";
 std::string v_url;
 std::string o_url;
 std::string n_url;
@@ -64,7 +64,8 @@ void CALL_TYPE PublishThread::run()
 
 		//o Delay to allow subscriber thread to set up
 		example::millisleep(100);
-    std::ifstream myfile ("/GMSEC_API/bin/dictionary_adaptor.json");
+    std::ifstream myfile ("dictionary_adaptor.json");
+    std::cout << "Lodaded dictionary" << '\n';
     std::string str((std::istreambuf_iterator<char>(myfile)), (std::istreambuf_iterator<char>()));
     dictionary = json::parse(str);
     for (size_t i = 0; i < dictionary["subsystems"].size(); i++) {
@@ -242,6 +243,10 @@ void PublishThread::setup()
 
 	//o Connect to the GMSEC bus
 	connection->connect();
+
+  // url = example::get(config, "KERBAL_URL", "http://192.168.1.4:8085");
+  // std::cout << "Listening to telemachus on " << url << '\n';
+  // url += "/telemachus/datalink?";
 }
 
 

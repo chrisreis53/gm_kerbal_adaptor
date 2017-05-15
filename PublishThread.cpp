@@ -38,6 +38,11 @@ static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *use
     return size * nmemb;
 }
 
+void writeToML(std::string msg){
+  // CURL *curl;
+  // CURLcode res;
+}
+
 PublishThread::PublishThread(Config &c)
 	: config(c),
 	  connection(0)
@@ -173,6 +178,7 @@ void PublishThread::get_v(){
         message.addField(field.c_str(), it.value().get<float>());
       }
     }
+
     connection->publish(message);
 	}
 }

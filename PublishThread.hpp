@@ -43,6 +43,7 @@ private:
 	PublishThread(const PublishThread& pt);
 	PublishThread& operator=(const PublishThread& pt);
 
+
 	void setup();
 	void teardown();
 
